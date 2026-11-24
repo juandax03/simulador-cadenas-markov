@@ -1,0 +1,9 @@
+APLICATIVO DE CADENAS DE MARKOV
+
+1. Abra index.html con Google Chrome, Microsoft Edge, Firefox o Safari.
+2. No requiere instalación ni conexión a Internet.
+3. Modifique los estados, la matriz, la distribución inicial y el horizonte.
+4. Presione "Calcular resultados".
+5. Consulte la guía de usuario entregada junto con esta carpeta para el ejemplo completo.
+
+Importante: las filas de la matriz y la distribución inicial deben sumar 1 o 100 %. El aplicativo acepta ambas escalas.

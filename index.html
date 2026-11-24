@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Simulador de Cadenas de Markov</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="institution">Instituto Tecnológico Metropolitano</div>
+    <div class="header-content">
+      <div>
+        <p class="eyebrow">Investigación de Operaciones</p>
+        <h1>Simulador de Cadenas de Markov</h1>
+        <p class="subtitle">Proyección de estados y análisis de la distribución de largo plazo</p>
+      </div>
+      <div class="authors">Gabriel A. Alzate<br>Juan D. Herrera</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel controls" aria-labelledby="datos-title">
+      <div class="section-heading">
+        <div><h2 id="datos-title">1. Datos del modelo</h2></div>
+        <button id="exampleBtn" class="secondary" type="button">Restaurar ejemplo SaaS</button>
+      </div>
+      <div class="grid-3">
+        <label>Número de estados
+          <select id="stateCount"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+        </label>
+        <label>Unidad de tiempo
+          <input id="timeUnit" value="mes" maxlength="30">
+        </label>
+        <label>Horizonte de proyección
+          <input id="horizon" type="number" min="1" max="500" value="12">
+        </label>
+      </div>
+      <div id="stateNames" class="state-names"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="matrix-title">
+      <div class="section-heading"><div><h2 id="matrix-title">2. Matriz de transición P</h2></div><span class="hint">Filas: estado actual | Columnas: estado siguiente</span></div>
+      <div class="table-wrap"><table id="matrixTable"></table></div>
+      <p id="matrixStatus" class="status" role="status"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="initial-title">
+      <div class="section-heading"><div><h2 id="initial-title">3. Distribución inicial</h2></div><span class="hint">Debe sumar 1 o 100 %</span></div>
+      <div id="initialVector" class="initial-vector"></div>
+      <div class="actions">
+        <button id="calculateBtn" class="primary" type="button">Calcular resultados</button>
+        <button id="exportBtn" class="secondary" type="button" disabled>Descargar resultados CSV</button>
+      </div>
+      <div id="errorBox" class="error-box" hidden></div>
+    </section>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <div class="results-title"><div><h2>4. Resultados del análisis</h2><p id="resultSummary"></p></div></div>
+      <div class="cards">
+        <article class="metric"><span>Tipo de cadena</span><strong id="chainType">—</strong><small id="chainDetail"></small></article>
+        <article class="metric"><span>Horizonte</span><strong id="horizonMetric">—</strong><small>proyección seleccionada</small></article>
+        <article class="metric"><span>Convergencia</span><strong id="convergenceMetric">—</strong><small>tolerancia 0,01 %</small></article>
+      </div>
+
+      <div class="output-grid">
+        <article class="panel inner">
+          <h3>Proyección desde la distribución inicial</h3>
+          <div id="projectionBars" class="bars"></div>
+          <div class="formula" id="projectionFormula"></div>
+        </article>
+        <article class="panel inner">
+          <h3>Distribución de largo plazo</h3>
+          <div id="stationaryBars" class="bars"></div>
+          <p id="stationaryNote" class="note"></p>
+        </article>
+      </div>
+
+      <article class="panel inner">
+        <div class="section-heading"><h3>Matriz de transición en n pasos P<sup>n</sup></h3><span id="powerLabel" class="hint"></span></div>
+        <div class="table-wrap"><table id="powerTable"></table></div>
+      </article>
+
+      <article class="panel inner">
+        <h3>Evolución de probabilidades</h3>
+        <div class="legend" id="chartLegend"></div>
+        <canvas id="evolutionChart" width="1100" height="380" aria-label="Gráfica de evolución de las probabilidades"></canvas>
+      </article>
+
+      <article class="panel inner analysis">
+        <h3>Interpretación automática</h3>
+        <p id="interpretation"></p>
+        <h4>Diagnóstico matemático</h4>
+        <ul id="diagnostics"></ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>Investigación de Operaciones | Ingeniería de Sistemas | 2026</footer>
+  <script src="app.js"></script>
+</body>
+</html>
